@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.sys.dao.TestDao">
+
+	<!-- 返回list模板 -->
+    <resultMap type="io.renren.modules.sys.entity.TestEntity" id="testMap">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="address" column="address"/>
+        <result property="date" column="date"/>
+        <result property="isdel" column="isdel"/>
+    </resultMap>
+
+	<select id="queryForTest" resultMap="testMap">
+		SELECT * FROM test GROUP BY address LIMIT #{id,jdbcType=INTEGER};
+	</select>
+
+</mapper>
