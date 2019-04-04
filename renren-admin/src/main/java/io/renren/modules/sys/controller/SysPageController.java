@@ -19,6 +19,16 @@ package io.renren.modules.sys.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Properties;
 
 /**
  * 系统页面视图
@@ -46,7 +56,10 @@ public class SysPageController {
 	}
 
 	@RequestMapping("login.html")
-	public String login(){
+	public String login(@RequestParam("scenicId") String scenicId, HttpServletRequest request,HttpServletResponse response){
+        HttpSession session=request.getSession();
+        String scenicName=getValueFromProperties(scenicId+"_name");
+        session.setAttribute("scenicName",scenicName);
 		return "login";
 	}
 
@@ -60,4 +73,14 @@ public class SysPageController {
 		return "404";
 	}
 
+	private String getValueFromProperties(String key){
+		Properties properties=new Properties();
+		try {
+			properties.load(new InputStreamReader(Thread.currentThread().getContextClassLoader()
+                    .getResourceAsStream("scenic.properties")));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return properties.getProperty(key);
+	}
 }

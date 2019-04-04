@@ -23,7 +23,11 @@
 <body class="hold-transition login-page">
 <div class="login-box" id="rrapp" v-cloak>
   <div class="login-logo">
-    <b>泸沽湖旅游系统</b>
+    <b>
+    <#if Session.scenicName?exists>
+     ${Session.scenicName}
+    </#if>
+</b>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
@@ -73,6 +77,40 @@
 <script src="${request.contextPath}/statics/libs/fastclick.min.js"></script>
 <script src="${request.contextPath}/statics/libs/app.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+    var scenicId = getQueryVariable('scenicId');
+    // alert(scenicId);
+    includeLinkStyle("/statics/css/"+scenicId+".css");
+    // alert(getCookie('scenicName'));
+});
+function getQueryVariable(variable)
+{
+       var query = window.location.search.substring(1);
+       var vars = query.split("&");
+       for (var i=0;i<vars.length;i++) {
+               var pair = vars[i].split("=");
+               if(pair[0] == variable){return pair[1];}
+       }
+       return(false);
+}
+function includeLinkStyle(url) {
+ var link = document.createElement("link");
+ link.rel = "stylesheet";
+ link.type = "text/css";
+ link.href = url;
+ document.head.appendChild(link);
+}
+function getCookie(cookieName) {
+    var strCookie = document.cookie;
+    var arrCookie = strCookie.split("; ");
+    for(var i = 0; i < arrCookie.length; i++){
+        var arr = arrCookie[i].split("=");
+        if(cookieName == arr[0]){
+            return arr[1];
+        }
+    }
+    return "";
+}
 var vm = new Vue({
 	el:'#rrapp',
 	data:{

@@ -20,6 +20,7 @@ package io.renren.modules.sys.controller;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import io.renren.common.utils.R;
+import io.renren.modules.sys.service.SysUserRoleService;
 import io.renren.modules.sys.shiro.ShiroUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
@@ -34,6 +35,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * 登录相关
@@ -46,6 +48,8 @@ import java.io.IOException;
 public class SysLoginController {
 	@Autowired
 	private Producer producer;
+	@Autowired
+	private SysUserRoleService sysUserRoleService;
 	
 	@RequestMapping("captcha.jpg")
 	public void captcha(HttpServletResponse response)throws IOException {
@@ -78,6 +82,11 @@ public class SysLoginController {
 			Subject subject = ShiroUtils.getSubject();
 			UsernamePasswordToken token = new UsernamePasswordToken(username, password);
 			subject.login(token);
+			subject.getSession().setAttribute("scenicId","lgh");
+			String roleName = sysUserRoleService.queryRoleNameList(ShiroUtils.getUserId());
+			if (roleName.contains("atm")){
+				subject.getSession().setTimeout(1000*10);
+			}
 		}catch (UnknownAccountException e) {
 			return R.error(e.getMessage());
 		}catch (IncorrectCredentialsException e) {
@@ -87,7 +96,6 @@ public class SysLoginController {
 		}catch (AuthenticationException e) {
 			return R.error("账户验证失败");
 		}
-	    
 		return R.ok();
 	}
 	
@@ -96,8 +104,9 @@ public class SysLoginController {
 	 */
 	@RequestMapping(value = "logout", method = RequestMethod.GET)
 	public String logout() {
+		String scenicId= (String) ShiroUtils.getSubject().getSession().getAttribute("scenicId");
 		ShiroUtils.logout();
-		return "redirect:login.html";
+		return "redirect:login.html?scenicId="+scenicId;
 	}
 	
 }

@@ -5,8 +5,6 @@ server:
         max-threads: 1000
         min-spare-threads: 30
     port: 8080
-    servlet:
-        context-path: /renren-admin
 
 # mysql
 spring:

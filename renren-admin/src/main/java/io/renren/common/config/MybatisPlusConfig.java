@@ -17,6 +17,7 @@
 package io.renren.common.config;
 
 import com.baomidou.mybatisplus.plugins.PaginationInterceptor;
+import io.renren.userDefined.mybatis.MySqlInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -35,5 +36,12 @@ public class MybatisPlusConfig {
     @Bean
     public PaginationInterceptor paginationInterceptor() {
         return new PaginationInterceptor();
+    }
+    /**
+     * sql过滤
+     */
+    @Bean
+    public MySqlInterceptor mySqlInterceptor() {
+        return new MySqlInterceptor();
     }
 }

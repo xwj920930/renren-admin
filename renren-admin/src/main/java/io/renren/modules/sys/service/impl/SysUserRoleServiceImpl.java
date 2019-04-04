@@ -64,6 +64,11 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleDao, SysUserR
 	}
 
 	@Override
+	public String queryRoleNameList(Long userId) {
+		return baseMapper.queryRoleNameList(userId);
+	}
+
+	@Override
 	public int deleteBatch(Long[] roleIds){
 		return baseMapper.deleteBatch(roleIds);
 	}

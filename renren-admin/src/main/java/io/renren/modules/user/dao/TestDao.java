@@ -1,8 +1,7 @@
-package io.renren.modules.sys.dao;
+package io.renren.modules.user.dao;
 
-import io.renren.modules.sys.entity.TestEntity;
+import io.renren.modules.user.entity.TestEntity;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 

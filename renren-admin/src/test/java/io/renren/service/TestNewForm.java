@@ -1,9 +1,8 @@
 package io.renren.service;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import io.renren.modules.sys.dao.TestDao;
-import io.renren.modules.sys.entity.TestEntity;
-import io.renren.modules.sys.service.TestService;
+import io.renren.modules.user.entity.TestEntity;
+import io.renren.modules.user.service.TestService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -22,7 +20,7 @@ public class TestNewForm {
     @Test
     public void insert(){
         TestEntity testEntity=new TestEntity();
-        //testEntity.setId(10);
+        testEntity.setId(11L);
         testEntity.setAddress("cd");
         testEntity.setName("xwj");
         testEntity.setDate(new Date());
@@ -32,21 +30,22 @@ public class TestNewForm {
     @Test
     public void updateById(){
         TestEntity testEntity=new TestEntity();
-        testEntity.setId(1011521023183151105L);
+        testEntity.setId(11L);
         testEntity.setAddress("成都");
         testEntity.setName("xwj");
         testEntity.setDate(new Date());
+        testEntity.setScenicId("lgh");
         testService.updateById(testEntity);
     }
     @Test
     public void deleteByLogic(){
         TestEntity testEntity=new TestEntity();
-        testEntity.setId(1011521023183151105L);
+        testEntity.setId(11L);
         testService.deleteById(testEntity);
     }
     @Test
     public void selectById(){
-        TestEntity testEntity=testService.selectById(1011521023183151105L);
+        TestEntity testEntity=testService.selectById(11L);
         System.err.print(testEntity.getName());
     }
     @Test

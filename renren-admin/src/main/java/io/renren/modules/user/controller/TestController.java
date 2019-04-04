@@ -1,4 +1,4 @@
-package io.renren.modules.sys.controller;
+package io.renren.modules.user.controller;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.renren.modules.sys.entity.TestEntity;
-import io.renren.modules.sys.service.TestService;
+import io.renren.modules.user.entity.TestEntity;
+import io.renren.modules.user.service.TestService;
 import io.renren.common.utils.PageUtils;
 import io.renren.common.utils.R;
 
@@ -36,7 +36,7 @@ public class TestController {
      * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("sys:test:list")
+    @RequiresPermissions("user:test:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = testService.queryPage(params);
 
@@ -48,7 +48,7 @@ public class TestController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    @RequiresPermissions("sys:test:info")
+    @RequiresPermissions("user:test:info")
     public R info(@PathVariable("id") Integer id){
         TestEntity test = testService.selectById(id);
 
@@ -59,7 +59,7 @@ public class TestController {
      * 保存
      */
     @RequestMapping("/save")
-    @RequiresPermissions("sys:test:save")
+    @RequiresPermissions("user:test:save")
     public R save(@RequestBody TestEntity test){
         testService.insert(test);
 
@@ -70,7 +70,7 @@ public class TestController {
      * 修改
      */
     @RequestMapping("/update")
-    @RequiresPermissions("sys:test:update")
+    @RequiresPermissions("user:test:update")
     public R update(@RequestBody TestEntity test){
         ValidatorUtils.validateEntity(test);
         testService.updateAllColumnById(test);//全部更新
@@ -82,7 +82,7 @@ public class TestController {
      * 删除
      */
     @RequestMapping("/delete")
-    @RequiresPermissions("sys:test:delete")
+    @RequiresPermissions("user:test:delete")
     public R delete(@RequestBody Integer[] ids){
         testService.deleteBatchIds(Arrays.asList(ids));
 

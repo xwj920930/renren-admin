@@ -1,4 +1,4 @@
-package io.renren.modules.sys.service.impl;
+package io.renren.modules.user.service.impl;
 
 import org.springframework.stereotype.Service;
 
@@ -10,9 +10,9 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import io.renren.common.utils.PageUtils;
 import io.renren.common.utils.Query;
 
-import io.renren.modules.sys.dao.TestDao;
-import io.renren.modules.sys.entity.TestEntity;
-import io.renren.modules.sys.service.TestService;
+import io.renren.modules.user.dao.TestDao;
+import io.renren.modules.user.entity.TestEntity;
+import io.renren.modules.user.service.TestService;
 
 
 @Service("testService")

@@ -1,4 +1,4 @@
-package io.renren.modules.sys.entity;
+package io.renren.modules.user.entity;
 
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableLogic;
@@ -43,6 +43,7 @@ public class TestEntity implements Serializable {
 	@TableLogic
 	private Integer isdel;
 
+	private String scenicId;
 	/**
 	 * 设置：
 	 */
@@ -99,4 +100,16 @@ public class TestEntity implements Serializable {
 	 * 获取：
 	 */
 	public void setIsdel(Integer isdel) { this.isdel = isdel; }
+
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
+	public String getScenicId() {
+		return scenicId;
+	}
+
+	public void setScenicId(String scenicId) {
+		this.scenicId = scenicId;
+	}
 }

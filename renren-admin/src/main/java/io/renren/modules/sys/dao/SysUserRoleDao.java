@@ -36,6 +36,11 @@ public interface SysUserRoleDao extends BaseMapper<SysUserRoleEntity> {
 	List<Long> queryRoleIdList(Long userId);
 
 	/**
+	 * 根据用户ID，获取角色名称列表
+	 */
+	String queryRoleNameList(Long userId);
+
+	/**
 	 * 根据角色ID数组，批量删除
 	 */
 	int deleteBatch(Long[] roleIds);
